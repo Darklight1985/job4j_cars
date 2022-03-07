@@ -1,13 +1,13 @@
-package ru.job4j.market;
+package ru.job4j.couples;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import ru.job4j.market.model.Car;
-import ru.job4j.market.model.Driver;
-import ru.job4j.market.model.Engine;
+import ru.job4j.couples.model.Car;
+import ru.job4j.couples.model.Driver;
+import ru.job4j.couples.model.Engine;
 
 public class HbmRun {
     public static void main(String[] args) {

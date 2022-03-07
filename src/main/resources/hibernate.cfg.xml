@@ -18,8 +18,12 @@
         <property name="format_sql">true</property>
         <property name="use_sql_comments">true</property>
 
-        <mapping class="ru.job4j.market.model.Engine" />
+        <mapping class="ru.job4j.couples.model.Engine" />
+        <mapping class="ru.job4j.couples.model.Car" />
+        <mapping class="ru.job4j.couples.model.Driver" />
         <mapping class="ru.job4j.market.model.Car" />
-        <mapping class="ru.job4j.market.model.Driver" />
+        <mapping class="ru.job4j.market.model.MarkAvto" />
+        <mapping class="ru.job4j.market.model.BodyType" />
+        <mapping class="ru.job4j.market.model.Item" />
     </session-factory>
 </hibernate-configuration>

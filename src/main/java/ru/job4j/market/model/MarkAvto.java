@@ -4,18 +4,19 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "engine")
-public class Engine {
+@Table(name = "marks_avto")
+public class MarkAvto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
 
-    public static Engine of(String name) {
-        Engine engine = new Engine();
-        engine.name = name;
-        return  engine;
+    public static MarkAvto of(String name) {
+        MarkAvto markAvto = new MarkAvto();
+        markAvto.name = name;
+        return markAvto;
     }
 
     public int getId() {
@@ -42,8 +43,8 @@ public class Engine {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Engine engine = (Engine) o;
-        return id == engine.id && Objects.equals(name, engine.name);
+        MarkAvto markAvto = (MarkAvto) o;
+        return id == markAvto.id && Objects.equals(name, markAvto.name);
     }
 
     @Override
@@ -53,7 +54,7 @@ public class Engine {
 
     @Override
     public String toString() {
-        return "Engine{"
+        return "MarkAvto{"
                 + "id=" + id
                 + ", name='" + name + '\''
                 + '}';

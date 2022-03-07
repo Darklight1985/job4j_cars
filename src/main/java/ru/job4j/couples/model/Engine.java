@@ -1,21 +1,21 @@
-package ru.job4j.market.model;
+package ru.job4j.couples.model;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "driver")
-public class Driver {
+@Table(name = "engine")
+public class Engine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
 
-    public static Driver of(String name) {
-        Driver driver = new Driver();
-        driver.name = name;
-        return driver;
+    public static Engine of(String name) {
+        Engine engine = new Engine();
+        engine.name = name;
+        return  engine;
     }
 
     public int getId() {
@@ -42,8 +42,8 @@ public class Driver {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Driver driver = (Driver) o;
-        return id == driver.id && Objects.equals(name, driver.name);
+        Engine engine = (Engine) o;
+        return id == engine.id && Objects.equals(name, engine.name);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class Driver {
 
     @Override
     public String toString() {
-        return "Driver{"
+        return "Engine{"
                 + "id=" + id
                 + ", name='" + name + '\''
                 + '}';
