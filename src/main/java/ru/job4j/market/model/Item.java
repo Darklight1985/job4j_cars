@@ -1,6 +1,7 @@
 package ru.job4j.market.model;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -12,7 +13,10 @@ public class Item {
 
     private String description;
 
-    @OneToOne
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
+
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "car_id")
     private Car car;
 
@@ -21,6 +25,7 @@ public class Item {
     public static Item of(String description) {
         Item item = new Item();
         item.description = description;
+        item.created = new Date(System.currentTimeMillis());
         return item;
     }
 
@@ -56,6 +61,14 @@ public class Item {
         this.photo = photo;
     }
 
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -65,12 +78,14 @@ public class Item {
             return false;
         }
         Item item = (Item) o;
-        return id == item.id && Objects.equals(description, item.description) && Objects.equals(car, item.car);
+        return id == item.id && Objects.equals(description, item.description)
+                && Objects.equals(created, item.created) && Objects.equals(car, item.car)
+                && Objects.equals(photo, item.photo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, car);
+        return Objects.hash(id, description, created, car, photo);
     }
 
     @Override
@@ -78,7 +93,9 @@ public class Item {
         return "Item{"
                 + "id=" + id
                 + ", description='" + description + '\''
+                + ", created=" + created
                 + ", car=" + car
+                + ", photo='" + photo + '\''
                 + '}';
     }
 }
