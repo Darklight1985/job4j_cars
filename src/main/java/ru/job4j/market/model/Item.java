@@ -16,9 +16,11 @@ public class Item {
     @JoinColumn(name = "car_id")
     private Car car;
 
+    private String photo;
+
     public static Item of(String description) {
         Item item = new Item();
-        item.description = item.description;
+        item.description = description;
         return item;
     }
 
@@ -44,6 +46,14 @@ public class Item {
 
     public void setCar(Car car) {
         this.car = car;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     @Override
