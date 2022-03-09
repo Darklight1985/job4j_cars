@@ -39,40 +39,34 @@ public class HbmStore implements Store, AutoCloseable {
     public List<Item> findAllItemDay() {
         Timestamp now = Timestamp.valueOf(LocalDateTime.now());
         Timestamp minusDay = Timestamp.valueOf(LocalDateTime.now().minusDays(1));
-        return this.tx(session ->  {
-            return session.createQuery(
-                    "select distinct i from Item i "
-                            + "join fetch i.car c "
-                            + "join fetch c.bodyType b "
-                            + "join fetch c.markAvto m "
-                            + "where i.created between :iNow and :iYesterday", Item.class
-            ).setParameter("iNow", now).setParameter("iYesterday", minusDay).getResultList();
-        });
+        return this.tx(session -> session.createQuery(
+                "select distinct i from Item i "
+                        + "join fetch i.car c "
+                        + "join fetch c.bodyType b "
+                        + "join fetch c.markAvto m "
+                        + "where i.created between :iNow and :iYesterday", Item.class
+        ).setParameter("iNow", now).setParameter("iYesterday", minusDay).getResultList());
     }
 
     public List<Item> findItemWithMark(MarkAvto markAvto) {
-        return this.tx(session ->  {
-            return session.createQuery(
-                    "select distinct i from Item i "
-                            + "join fetch i.car c "
-                            + "join fetch c.bodyType b "
-                            + "join fetch c.markAvto m "
-                            + "where m = :mark", Item.class
-            ).setParameter("mark", markAvto).getResultList();
-        });
+        return this.tx(session -> session.createQuery(
+                "select distinct i from Item i "
+                        + "join fetch i.car c "
+                        + "join fetch c.bodyType b "
+                        + "join fetch c.markAvto m "
+                        + "where m = :mark", Item.class
+        ).setParameter("mark", markAvto).getResultList());
     }
 
     public List<Item> findItemWithPhoto() {
 
-            return this.tx(session ->  {
-               return session.createQuery(
-                    "select distinct i from Item i "
-                            + "join fetch i.car c "
-                            + "join fetch c.bodyType b "
-                            + "join fetch c.markAvto m "
-                            + "where i.photo is not null", Item.class
-            ).getResultList();
-            });
+            return this.tx(session -> session.createQuery(
+                 "select distinct i from Item i "
+                         + "join fetch i.car c "
+                         + "join fetch c.bodyType b "
+                         + "join fetch c.markAvto m "
+                         + "where i.photo is not null", Item.class
+         ).getResultList());
     }
 
     private <T> T tx(final Function<Session, T> command) {
