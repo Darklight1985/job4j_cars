@@ -1,11 +1,14 @@
-package ru.job4j.market.model;
+package ru.job4j.autosale.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "marks_avto")
-public class MarkAvto {
+@Table(name = "marks")
+public class MarkAvto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,10 +16,25 @@ public class MarkAvto {
 
     private String name;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Model> models = new ArrayList<>();
+
     public static MarkAvto of(String name) {
         MarkAvto markAvto = new MarkAvto();
         markAvto.name = name;
         return markAvto;
+    }
+
+    public List<Model> getModels() {
+        return models;
+    }
+
+    public void addModel(Model model) {
+        this.models.add(model);
+    }
+
+    public void setModels(List<Model> models) {
+        this.models = models;
     }
 
     public int getId() {
@@ -57,6 +75,7 @@ public class MarkAvto {
         return "MarkAvto{"
                 + "id=" + id
                 + ", name='" + name + '\''
+                + ", models=" + models
                 + '}';
     }
 }

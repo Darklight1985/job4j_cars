@@ -1,21 +1,23 @@
-package ru.job4j.couples.model;
+package ru.job4j.autosale.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "engine")
-public class Engine {
+@Table(name = "models")
+public class Model implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
 
-    public static Engine of(String name) {
-        Engine engine = new Engine();
-        engine.name = name;
-        return  engine;
+    public static Model of(String name) {
+        Model model = new Model();
+        model.name = name;
+        return model;
     }
 
     public int getId() {
@@ -42,8 +44,8 @@ public class Engine {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Engine engine = (Engine) o;
-        return id == engine.id && Objects.equals(name, engine.name);
+        Model model = (Model) o;
+        return id == model.id && Objects.equals(name, model.name);
     }
 
     @Override
@@ -53,7 +55,7 @@ public class Engine {
 
     @Override
     public String toString() {
-        return "Engine{"
+        return "Model{"
                 + "id=" + id
                 + ", name='" + name + '\''
                 + '}';

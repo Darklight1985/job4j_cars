@@ -1,22 +1,25 @@
-package ru.job4j.market.model;
+package ru.job4j.autosale.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "body_type")
-public class BodyType {
-
+@Table(name = "users")
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String name;
+    private String password;
 
-    public static BodyType of(String name) {
-        BodyType bodyType = new BodyType();
-        bodyType.name = name;
-        return bodyType;
+    public static User of(String name, String password) {
+        User user = new User();
+        user.name = name;
+        user.password = password;
+        return user;
     }
 
     public int getId() {
@@ -35,6 +38,14 @@ public class BodyType {
         this.name = name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -43,20 +54,21 @@ public class BodyType {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        BodyType bodyType = (BodyType) o;
-        return id == bodyType.id && Objects.equals(name, bodyType.name);
+        User user = (User) o;
+        return id == user.id && Objects.equals(name, user.name) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, password);
     }
 
     @Override
     public String toString() {
-        return "BodyType{"
+        return "User{"
                 + "id=" + id
                 + ", name='" + name + '\''
+                + ", password='" + password + '\''
                 + '}';
     }
 }

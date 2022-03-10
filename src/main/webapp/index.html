@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>AJAX</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+<script>
+    $(document).ready(function () {
+        {
+            addAds();
+        }})
+</script>
+<script>
+    function addAds() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/salecars/adcar",
+            dataType: "json",
+            success: function (data) {
+                addRow(data);
+            }
+        })
+    }
+</script>
+<script>
+    function addRow(data) {
+        for (let i = 0; i < data.length; i++) {
+            $newdiv = document.createElement('div');
+            $td1 = document.createElement('td')
+            $td1.innerHTML = parseInt(i + 1);
+            $tr = document.createElement('tr');
+            $input = document.createElement('label');
+            $input.innerText = data[i]['id'];
+            $newdiv.appendChild($input);
+            $tr.appendChild($td1);
+            $tr.appendChild($newdiv);
+            $('#carss').appendChild($tr);
+        }
+    }
+</script>
+
+<body>
+<div class="container-fluid">
+    <form>
+        <div class="card text-center">
+            <div class="card-header" align="left">
+                <div class="nav-item" id="userrow">
+                </div>
+                <div class="nav-item" id="sessionUser">
+                    <a class="nav-link" > Выйти</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card" style="width: 50%">
+                    <form>
+                        <div class="form-group" align="center">
+                            <br>
+                            <button type="submit" class="btn btn-primary" style="width: 50%" onclick="addAds()">Разместить объявление </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <table class="table" id = "table">
+            <thead class="table-sub-heading-color">
+                <h4>Перечень объявлений</h4>
+            </thead>
+            <tbody>
+            <div class="card text-white bg-info mb-3" id="newdivcar">
+                <div class="row no-gutters" id="adscars">
+                    <div class="col-md-5">
+                        <img src=".\images\car.jpg" alt="...">
+                    </div>
+                    <div class="card-deck" id = "carss">
+                        <div class="card-body" id = "namek">
+                            <label for="name">Тип кузова</label>
+                            <input type="text" class="form-control" id="name" style="width: 100%">
+                            <label for="engine">Двигатель</label>
+                            <input type="text" class="form-control" id="engine" value="Бензин" style="width: 100%" readonly>
+                        </div>
+                        <div class="card-body">
+                            <label for="sname">Тип кузова</label>
+                            <input type="text" class="form-control" id="sname" value="Седан" style="width: 100%" readonly>
+                            <label for="sengine">Двигатель</label>
+                            <input type="text" class="form-control" id="sengine" value="Бензин" style="width: 100%" readonly>
+                        </div>
+                        <div class="card-body">
+                            <label for="tname">Тип кузова</label>
+                            <input type="text" class="form-control" id="tname" value="Седан" style="width: 100%" readonly>
+                            <label for="tengine">Двигатель</label>
+                            <input type="text" class="form-control" id="tengine" value="Бензин" style="width: 100%" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div id = "check">
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" value="" id="checkTask">'
+                        <label className="form-check-label" htmlFor="checkTask"> Закрыть объявление о продаже</label> </div>
+                </div>
+            </div>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+</html>

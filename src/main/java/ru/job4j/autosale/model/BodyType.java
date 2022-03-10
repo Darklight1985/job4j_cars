@@ -1,21 +1,23 @@
-package ru.job4j.couples.model;
+package ru.job4j.autosale.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "driver")
-public class Driver {
+@Table(name = "bodys")
+public class BodyType implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
 
-    public static Driver of(String name) {
-        Driver driver = new Driver();
-        driver.name = name;
-        return driver;
+    public static BodyType of(String name) {
+        BodyType bodyType = new BodyType();
+        bodyType.name = name;
+        return bodyType;
     }
 
     public int getId() {
@@ -42,8 +44,8 @@ public class Driver {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Driver driver = (Driver) o;
-        return id == driver.id && Objects.equals(name, driver.name);
+        BodyType bodyType = (BodyType) o;
+        return id == bodyType.id && Objects.equals(name, bodyType.name);
     }
 
     @Override
@@ -53,7 +55,7 @@ public class Driver {
 
     @Override
     public String toString() {
-        return "Driver{"
+        return "BodyType{"
                 + "id=" + id
                 + ", name='" + name + '\''
                 + '}';
