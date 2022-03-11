@@ -56,11 +56,11 @@ public class Car implements Serializable {
         this.power = power;
     }
 
-    public Model getMarkAvto() {
+    public Model getModel() {
         return model;
     }
 
-    public void setMarkAvto(Model model) {
+    public void setModel(Model model) {
         this.model = model;
     }
 

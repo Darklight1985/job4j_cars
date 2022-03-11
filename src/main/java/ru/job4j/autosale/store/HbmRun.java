@@ -42,7 +42,6 @@ public class HbmRun {
             Car car = Car.of("125", kiaRio, sedan, gasoline, front);
             User user = User.of("Dima", "123456");
             Ad adOne = Ad.of("Продаю машину", car, user, false);
-            adOne.setUser(user);
 
             session.save(user);
             car = session.get(Car.class, 1);

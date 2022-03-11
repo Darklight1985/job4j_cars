@@ -19,6 +19,51 @@
     <servlet-class>ru.job4j.autosale.servlet.AdServlet</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>AuthServlet</servlet-name>
+    <servlet-class>ru.job4j.autosale.servlet.AuthServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>ru.job4j.autosale.servlet.LogoutServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>RegServlet</servlet-name>
+    <servlet-class>ru.job4j.autosale.servlet.RegServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>IndexServlet</servlet-name>
+    <servlet-class>ru.job4j.autosale.servlet.IndexServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>ModelServlet</servlet-name>
+    <servlet-class>ru.job4j.autosale.servlet.ModelServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>BodyServlet</servlet-name>
+    <servlet-class>ru.job4j.autosale.servlet.BodyServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>EngineServlet</servlet-name>
+    <servlet-class>ru.job4j.autosale.servlet.EngineServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>DriveServlet</servlet-name>
+    <servlet-class>ru.job4j.autosale.servlet.DriveServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>FileUploadHandler</servlet-name>
+    <servlet-class>ru.job4j.autosale.servlet.FileUploadHandler</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>CalcServlet</servlet-name>
     <url-pattern>/calc</url-pattern>
@@ -29,4 +74,58 @@
     <url-pattern>/adcar</url-pattern>
   </servlet-mapping>
 
+  <servlet-mapping>
+    <servlet-name>AuthServlet</servlet-name>
+    <url-pattern>/auth.do</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/logout.do</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>RegServlet</servlet-name>
+    <url-pattern>/reg.do</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>IndexServlet</servlet-name>
+    <url-pattern>/index.do</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>DriveServlet</servlet-name>
+    <url-pattern>/getdrive</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>BodyServlet</servlet-name>
+    <url-pattern>/getbody</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>EngineServlet</servlet-name>
+    <url-pattern>/getengine</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ModelServlet</servlet-name>
+    <url-pattern>/getmodel</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>FileUploadHandler</servlet-name>
+    <url-pattern>/upload</url-pattern>
+  </servlet-mapping>
+
+  <filter>
+    <filter-name>AuthFilter</filter-name>
+    <filter-class>ru.job4j.autosale.filter.AuthFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <url-pattern>*.html</url-pattern>
+  </filter-mapping>
 </web-app>

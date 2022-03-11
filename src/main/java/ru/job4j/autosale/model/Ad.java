@@ -87,8 +87,8 @@ public class Ad implements Serializable {
         this.photo = photo;
     }
 
-    public Date getCreated() {
-        return created;
+    public String getCreated() {
+        return created.toString();
     }
 
     public void setCreated(Date created) {

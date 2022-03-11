@@ -7,8 +7,9 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import ru.job4j.autosale.model.Car;
+import ru.job4j.autosale.model.*;
 
+import java.util.List;
 import java.util.function.Function;
 
 public class HbmStoreCar implements StoreCar, AutoCloseable {
@@ -39,11 +40,56 @@ public class HbmStoreCar implements StoreCar, AutoCloseable {
     }
 
     @Override
+    public Car createCar(String power, String modelId, String bodyId,
+                          String engineId, String driveID) {
+       return this.tx(session -> {
+            Car car = Car.of(power, session.find(Model.class, Integer.parseInt(modelId)),
+                    session.find(BodyType.class, Integer.parseInt(bodyId)),
+                    session.find(EngineType.class, Integer.parseInt(engineId)),
+                    session.find(DriveType.class, Integer.parseInt(driveID)));
+            session.save(car);
+            return car;
+    });
+    }
+
+    @Override
     public Car findCar(int id) {
         return (Car) this.tx(session -> {
             final Query query = session.createQuery("from Car where id = :value");
             query.setParameter("value", id);
             return query.uniqueResult();
+        });
+    }
+
+    @Override
+    public List<Model> findModel() {
+        return this.tx(session -> {
+            final Query query = session.createQuery("from Model");
+            return query.getResultList();
+        });
+    }
+
+    @Override
+    public List<BodyType> findBody() {
+        return this.tx(session -> {
+            final Query query = session.createQuery("from BodyType");
+            return query.getResultList();
+        });
+    }
+
+    @Override
+    public List<DriveType> findDrive() {
+        return this.tx(session -> {
+            final Query query = session.createQuery("from DriveType");
+            return query.getResultList();
+        });
+    }
+
+    @Override
+    public List<EngineType> findEngine() {
+        return this.tx(session -> {
+            final Query query = session.createQuery("from EngineType");
+            return query.getResultList();
         });
     }
 

@@ -18,7 +18,7 @@ public class HbmStoreCarTest {
         Car car = Car.of("125", kiaRio, sedan, gasoline, front);
         storeCar.addCar(car);
         Car result = storeCar.findCar(car.getId());
-        assertThat(result.getMarkAvto(), is(car.getMarkAvto()));
+        assertThat(result.getModel(), is(car.getModel()));
     }
 
 }

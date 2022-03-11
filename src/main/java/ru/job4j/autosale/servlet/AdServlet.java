@@ -2,7 +2,12 @@ package ru.job4j.autosale.servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.job4j.autosale.model.Ad;
+import ru.job4j.autosale.model.Car;
+import ru.job4j.autosale.model.User;
 import ru.job4j.autosale.store.HbmStoreAd;
+import ru.job4j.autosale.store.HbmStoreCar;
+import ru.job4j.autosale.store.StoreAd;
+import ru.job4j.autosale.store.StoreCar;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,5 +30,22 @@ public class AdServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         out.print(jsonString);
         out.flush();
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        String descr = req.getParameter("descr");
+        String power = req.getParameter("power");
+        String model = req.getParameter("model");
+        String body = req.getParameter("body");
+        String engine = req.getParameter("engine");
+        String drive = req.getParameter("drive");
+        User user = (User) req.getSession().getAttribute("user");
+        StoreCar storeCar = HbmStoreCar.instOf();
+        Car car = storeCar.createCar(power, model, body, engine, drive);
+        StoreAd storeAd = HbmStoreAd.instOf();
+        storeAd.addAd(Ad.of(descr, car, user, false));
+        resp.sendRedirect(req.getContextPath() + "/index.do");
     }
 }

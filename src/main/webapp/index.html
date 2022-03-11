@@ -2,22 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
+    <title>TODOlist</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>AJAX</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <script type="text/javascript" src="myscript.js"></script>
 </head>
+<body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.0.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
 <script>
     $(document).ready(function () {
@@ -38,81 +43,191 @@
     }
 </script>
 <script>
+    function getUser() {
+        var value;
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/salecars/auth.do",
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                $p = document.createElement('a')
+                $p.className = "nav-link";
+                $p.text = "Пользователь: " + data['name']
+                $('#userrow li:first').append($p);
+               value = data[1]['user'].name;
+            }
+        })
+        return value;
+    }
+
     function addRow(data) {
+         var  cifra = getUser()
         for (let i = 0; i < data.length; i++) {
+            <!-- <Блок с изображением> -->
+              $divcap = document.createElement('div');
+              $newimg = document.createElement('img');
+              $newimg.width = "450";
+              $newimg.src = ".\\images\\car.jpg"
+            $divcap.className = "col-md-5";
+              $divcheck = document.createElement('div');
+              $divcheck.className = "form-check";
+              $inputad = document.createElement('input');
+              $inputad.className = "form-check-input";
+              $inputad.type = "checkbox";
+              $inputad.id = data[i]['id'];
+              $inputad.disabled = true;
+              $labelcheck = document.createElement('label');
+              $labelcheck.className = "form-check-label";
+              $labelcheck.htmlFor = data[i]['id'];
+              $labelcheck.innerText= "Закрыть заявление о продаже"
+
+              $divcheck.appendChild($inputad);
+             $divcheck.appendChild($labelcheck);
+
+              $divcap.appendChild($newimg);
+            $divcap.appendChild($divcheck);
+
+            <!-- <Блок содержащий карточки данных> -->
+              $divcard = document.createElement('div');
+              $divcard.className = "card-deck";
+
             $newdiv = document.createElement('div');
-            $td1 = document.createElement('td')
-            $td1.innerHTML = parseInt(i + 1);
-            $tr = document.createElement('tr');
-            $input = document.createElement('label');
-            $input.innerText = data[i]['id'];
-            $newdiv.appendChild($input);
-            $tr.appendChild($td1);
-            $tr.appendChild($newdiv);
-            $('#carss').appendChild($tr);
+            $newdiv.className = "card-body";
+            $labelUser = document.createElement('label');
+            $labelUser.innerHTML = "Владелец";
+            $inputUser = document.createElement('input');
+            $inputUser.className = "form-control";
+            $inputUser.style = "width: 100%";
+            $inputUser.value = data[i]['user'].name;
+            $inputUser.readOnly = true;
+
+            $labelModel = document.createElement('label');
+            $labelModel.innerHTML = "Модель"
+            $inputModel = document.createElement('input');
+            $inputModel.className = "form-control";
+            $inputModel.style = "width: 100%";
+            $inputModel.value = data[i]['car'].model.name;
+            $inputModel.readOnly = true;
+            $labelDate = document.createElement('label');
+            $labelDate.innerHTML = "Дата размещенея объявления"
+            $inputDate = document.createElement('input');
+            $inputDate.className = "form-control";
+            $inputDate.style = "width: 100%";
+            $inputDate.value = data[i]['created'];
+            $inputDate.readOnly = true;
+            $labelStatus = document.createElement('label');
+            $labelStatus.innerHTML = "Статус объявления"
+            $inputStatus = document.createElement('input');
+            $inputStatus.className = "form-control";
+            $inputStatus.style = "width: 100%";
+            if (data[i]['done'] == true) {
+                $inputStatus.value = "Продано";
+            } else {
+                $inputStatus.value = "В продаже";
+            }
+            $inputStatus.readOnly = true;
+            $labelDescr = document.createElement('label');
+            $labelDescr.innerHTML = data[i]['description'];
+            $newdiv.appendChild($labelUser);
+            $newdiv.appendChild($inputUser);
+            $newdiv.appendChild($labelModel);
+            $newdiv.appendChild($inputModel);
+            $newdiv.appendChild($labelDate);
+            $newdiv.appendChild($inputDate);
+            $newdiv.appendChild($labelStatus);
+            $newdiv.appendChild($inputStatus)
+
+            $newdiv.appendChild(document.createElement('br'));
+            $newdiv.appendChild($labelDescr);
+
+
+            $newdiv2 = document.createElement('div');
+            $newdiv2.className = "card-body";
+            $labelBody = document.createElement('label');
+            $labelBody.innerHTML = "Тип кузова"
+            $inputBody = document.createElement('input');
+            $inputBody.className = "form-control";
+            $inputBody.style = "width: 100%";
+            $inputBody.value =  data[i]['car'].bodyType.name;
+            $inputBody.readOnly = true;
+            $labelEngine = document.createElement('label');
+            $labelEngine.innerHTML = "Двигатель"
+            $inputEngine = document.createElement('input');
+            $inputEngine.className = "form-control";
+            $inputEngine.style = "width: 100%";
+            $inputEngine.value =  data[i]['car'].engine.name;
+            $inputEngine.readOnly = true;
+
+            $newdiv2.appendChild($labelBody);
+            $newdiv2.appendChild($inputBody);
+            $newdiv2.appendChild($labelEngine);
+            $newdiv2.appendChild($inputEngine);
+
+            $newdiv3 = document.createElement('div');
+            $newdiv3.className = "card-body";
+            $labelDrive = document.createElement('label');
+            $labelDrive.innerHTML = "Тип привода"
+            $inputDrive = document.createElement('input');
+            $inputDrive.className = "form-control";
+            $inputDrive.style = "width: 100%";
+            $inputDrive.value =  data[i]['car'].driveType.name;
+            $inputDrive.readOnly = true;
+            $labelPower = document.createElement('label');
+            $labelPower.innerHTML = "Мощность, л.с."
+            $inputPower = document.createElement('input');
+            $inputPower.className = "form-control";
+            $inputPower.style = "width: 100%";
+            $inputPower.value =  data[i]['car'].power;
+            $inputPower.readOnly = true;
+
+            $newdiv3.appendChild($labelDrive);
+            $newdiv3.appendChild($inputDrive);
+            $newdiv3.appendChild($labelPower);
+            $newdiv3.appendChild($inputPower);
+
+            $divcard.appendChild($newdiv);
+            $divcard.appendChild($newdiv2);
+            $divcard.appendChild($newdiv3);
+
+                <!-- <Создаем основной несущий блок> -->
+
+            $divgen = document.createElement('div');
+            $divgen.className = "card text-white bg-dark mb-3";
+
+            $divsub = document.createElement('div');
+            $divsub.className = "row no-gutters";
+
+            $divsub.appendChild($divcap)
+            $divsub.appendChild($divcard)
+
+            $divgen.appendChild($divsub);
+
+            $('#table tbody').append($divgen);
+
         }
     }
 </script>
 
-<body>
 <div class="container-fluid">
     <form>
-        <div class="card text-center">
-            <div class="card-header" align="left">
-                <div class="nav-item" id="userrow">
-                </div>
-                <div class="nav-item" id="sessionUser">
-                    <a class="nav-link" > Выйти</a>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="card" style="width: 50%">
-                    <form>
-                        <div class="form-group" align="center">
-                            <br>
-                            <button type="submit" class="btn btn-primary" style="width: 50%" onclick="addAds()">Разместить объявление </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <div class="card-header" >
+                <ul class="nav" id="userrow">
+                    <li class="nav-item">
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/salecars/logout.do">Выйти</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/salecars/newad.html">Разместить объявление</a>
+                    </li>
+                </ul>
         </div>
         <table class="table" id = "table">
             <thead class="table-sub-heading-color">
-                <h4>Перечень объявлений</h4>
+            <span class="badge badge-secondary"><h4>Перечень объявлений</h4></span>
             </thead>
             <tbody>
-            <div class="card text-white bg-info mb-3" id="newdivcar">
-                <div class="row no-gutters" id="adscars">
-                    <div class="col-md-5">
-                        <img src=".\images\car.jpg" alt="...">
-                    </div>
-                    <div class="card-deck" id = "carss">
-                        <div class="card-body" id = "namek">
-                            <label for="name">Тип кузова</label>
-                            <input type="text" class="form-control" id="name" style="width: 100%">
-                            <label for="engine">Двигатель</label>
-                            <input type="text" class="form-control" id="engine" value="Бензин" style="width: 100%" readonly>
-                        </div>
-                        <div class="card-body">
-                            <label for="sname">Тип кузова</label>
-                            <input type="text" class="form-control" id="sname" value="Седан" style="width: 100%" readonly>
-                            <label for="sengine">Двигатель</label>
-                            <input type="text" class="form-control" id="sengine" value="Бензин" style="width: 100%" readonly>
-                        </div>
-                        <div class="card-body">
-                            <label for="tname">Тип кузова</label>
-                            <input type="text" class="form-control" id="tname" value="Седан" style="width: 100%" readonly>
-                            <label for="tengine">Двигатель</label>
-                            <input type="text" class="form-control" id="tengine" value="Бензин" style="width: 100%" readonly>
-                        </div>
-                    </div>
-                </div>
-                <div id = "check">
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" id="checkTask">'
-                        <label className="form-check-label" htmlFor="checkTask"> Закрыть объявление о продаже</label> </div>
-                </div>
-            </div>
             </tbody>
         </table>
     </form>
