@@ -35,8 +35,18 @@ public class HbmStoreAd implements StoreAd, AutoCloseable {
     }
 
     @Override
-    public void addAd(Ad ad) {
-         this.tx(session -> session.save(ad));
+    public int addAd(Ad ad) {
+         return this.tx(session -> {
+             return (int) session.save(ad);
+         });
+    }
+
+    @Override
+    public boolean updateAd(Ad ad) {
+        return this.tx(session ->  {
+             session.saveOrUpdate(ad);
+             return true;
+         });
     }
 
     @Override
@@ -51,6 +61,23 @@ public class HbmStoreAd implements StoreAd, AutoCloseable {
                     + "join fetch c.model", Ad.class);
             List<Ad> result = (List<Ad>) query.getResultList();
             return result;
+        });
+    }
+
+    @Override
+    public Ad findAdById(int id) {
+        return this.tx(session -> {
+            final Query query = session.createQuery("select distinct i from Ad i "
+                    + "join fetch i.user "
+                    + "join fetch i.car c "
+                    + "join fetch c.bodyType "
+                    + "join fetch c.engine "
+                    + "join fetch c.driveType "
+                    + "join fetch c.model "
+                    + "where i.id = :value", Ad.class);
+            query.setParameter("value", id);
+            Ad ad =  (Ad) query.uniqueResult();
+            return ad;
         });
     }
 

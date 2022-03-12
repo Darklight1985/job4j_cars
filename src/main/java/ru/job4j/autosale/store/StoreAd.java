@@ -6,9 +6,13 @@ import java.util.List;
 
 public interface StoreAd {
 
-    void addAd(Ad ad);
+    int addAd(Ad ad);
+
+    boolean updateAd(Ad ad);
 
     List<Ad> findAll();
 
     public List<Ad> findNotFinal();
+
+    Ad findAdById(int id);
 }

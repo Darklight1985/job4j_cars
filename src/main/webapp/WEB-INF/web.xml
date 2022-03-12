@@ -64,6 +64,12 @@
     <servlet-class>ru.job4j.autosale.servlet.FileUploadHandler</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>PutServlet</servlet-name>
+    <servlet-class>ru.job4j.autosale.servlet.PutServlet</servlet-class>
+  </servlet>
+
+
   <servlet-mapping>
     <servlet-name>CalcServlet</servlet-name>
     <url-pattern>/calc</url-pattern>
@@ -117,6 +123,11 @@
   <servlet-mapping>
     <servlet-name>FileUploadHandler</servlet-name>
     <url-pattern>/upload</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>PutServlet</servlet-name>
+    <url-pattern>/putitem</url-pattern>
   </servlet-mapping>
 
   <filter>

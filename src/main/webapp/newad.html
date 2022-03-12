@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
+    <script type="text/javascript" src="indexscript.js"></script>
 </head>
 <body>
 <!-- Optional JavaScript -->
@@ -33,192 +34,69 @@
             getEngine();
         }})
 </script>
-<script>
-    function getUser() {
-        $.ajax({
-            type: "GET",
-            url: "http://localhost:8080/salecars/auth.do",
-            dataType: "json",
-            success: function (data) {
-                $p = document.createElement('a')
-                $p.className = "nav-link";
-                $p.text = "Пользователь: " + data['name']
-                $('#userrow li:first').append($p);
-            }
-        })
-    }
-
-    function newAd() {
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/salecars/adcar",
-            data: {'engine': $('#EngineGroup').val(),
-            'body': $('#BodyGroup').val(),
-                'model': $('#ModelGroup').val(),
-                'drive': $('#DriveGroup').val(),
-                'power': $('#powerin').val(),
-                'descr': $('#descrin').val()
-            },
-            dataType: "json",
-            success: function () {
-            }
-        })
-    }
-</script>
-<script>
-    function getModel() {
-        $.ajax({
-            type: "GET",
-            url: "http://localhost:8080/salecars/getmodel",
-            async: false,
-            dataType: "json",
-            success: function (datamodel) {
-                $('#ModelGroup option').remove();
-                for (let i = 0; i < datamodel.length; i++) {
-                    $option = document.createElement('option')
-                    $option.value = datamodel[i]['id']
-                    $option.innerHTML = datamodel[i]['name']
-                    $('#ModelGroup').append($option);
-                }
-            }
-        })
-    }
-
-    function getBody() {
-        $.ajax({
-            type: "GET",
-            url: "http://localhost:8080/salecars/getbody",
-            async: false,
-            dataType: "json",
-            success: function (databody) {
-                $('#BodyGroup option').remove();
-                for (let i = 0; i < databody.length; i++) {
-                    $option = document.createElement('option')
-                    $option.value = databody[i]['id']
-                    $option.innerHTML = databody[i]['name']
-                    $('#BodyGroup').append($option);
-                }
-            }
-        })
-    }
-
-    function getDrive() {
-        $.ajax({
-            type: "GET",
-            url: "http://localhost:8080/salecars/getdrive",
-            async: false,
-            dataType: "json",
-            success: function (datadrive) {
-                $('#DriveGroup option').remove();
-                for (let i = 0; i < datadrive.length; i++) {
-                    $option = document.createElement('option')
-                    $option.value = datadrive[i]['id']
-                    $option.innerHTML = datadrive[i]['name']
-                    $('#DriveGroup').append($option);
-                }
-            }
-        })
-    }
-    function other(){
-       let engine = $('#EngineGroup').val();
-        let   body= $('#BodyGroup').val();
-        let   model= $('#ModelGroup').val();
-        let   drive= $('#DriveGroup').val();
-        let   power = $('#powerin').val();
-        let  descr =  $('#descrin').val();
-        window.location.href = "/salecars/adcar?model=" + model
-        + "engine =" + engine;
-    }
-
-    function getEngine() {
-        $.ajax({
-            type: "GET",
-            url: "http://localhost:8080/salecars/getengine",
-            async: false,
-            dataType: "json",
-            success: function (dataengine) {
-                $('#EngineGroup option').remove();
-                for (let i = 0; i < dataengine.length; i++) {
-                    $option = document.createElement('option')
-                    $option.value = dataengine[i]['id']
-                    $option.innerHTML = dataengine[i]['name']
-                    $('#EngineGroup').append($option);
-                }
-            }
-        })
-    }
-</script>
 
 <div class="container-fluid">
-        <div class="card-header" >
-            <ul class="nav" id="userrow">
-                <li class="nav-item">
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/salecars/logout.do">Выйти</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/salecars/index.do">В главное меню</a>
-                </li>
-            </ul>
-        </div>
-            <span class="badge badge-secondary"><h4>Новое объявление</h4></span>
-    <div>
-        <h5> Выберите фото машины </h5>
-        <form action="upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" />
-            <input type="submit" value="upload" />
-        </form>
+    <div class="card-header">
+        <ul class="nav" id="userrow">
+            <li class="nav-item">
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/salecars/logout.do">Выйти</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/salecars/index.do">В главное меню</a>
+            </li>
+        </ul>
     </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="ModelGroup">Модель</label>
-                    </div>
-                    <select class="custom-select" name="model" id="ModelGroup" required>
-                        <option selected>Выберите модель</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="BodyGroup">Тип кузова</label>
-                    </div>
-                    <select class="custom-select" name="body" id="BodyGroup" required>
-                        <option selected>Выберите тип кузова</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="DriveGroup">Тип привода</label>
-                    </div>
-                    <select class="custom-select" name="drive" id="DriveGroup" required>
-                        <option selected>Выберите тип привода</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="EngineGroup">Двигатель</label>
-                    </div>
-                    <select class="custom-select" name="engine" id="EngineGroup" required>
-                        <option selected>Выберите тип двигателя</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div class="form-group" align="center">
-                    <label>Мощность</label>
-                    <input type="text" class="form-control" name="power" id="powerin" style="width: 45%" required>
-                    <label>Описание</label>
-                    <input type="text" class="form-control" name="descr" id="descrin" style="width: 45%" required>
-                    <div><br></div>
-                    <button type="submit" class="btn btn-primary" onclick="newAd()" style="width: 50%">Добавить
-                    </button>
-                </div>
-            </tbody>
-        </table>
+    <span class="badge badge-secondary"><h4>Новое объявление</h4></span>
+    <form action="adcar" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="ModelGroup">Модель</label>
+        </div>
+        <select class="custom-select" name="model" id="ModelGroup" required>
+            <option selected>Выберите модель</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="BodyGroup">Тип кузова</label>
+        </div>
+        <select class="custom-select" name="body" id="BodyGroup" required>
+            <option selected>Выберите тип кузова</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="DriveGroup">Тип привода</label>
+        </div>
+        <select class="custom-select" name="drive" id="DriveGroup" required>
+            <option selected>Выберите тип привода</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="EngineGroup">Двигатель</label>
+        </div>
+        <select class="custom-select" name="engine" id="EngineGroup" required>
+            <option selected>Выберите тип двигателя</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+    </div>
+    <div class="form-group" align="center">
+            <label>Мощность</label>
+            <input type="text" class="form-control" name="power" id="powerin" style="width: 45%" required>
+            <label>Описание</label>
+            <input type="text" class="form-control" name="descr" id="descrin" style="width: 45%" required>
+            <button type="submit" class="btn btn-primary" style="width: 50%">Добавить
+            </button>
+    </div>
+    </form>
 </div>
 
 </body>

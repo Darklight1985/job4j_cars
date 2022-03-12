@@ -45,7 +45,9 @@ public class AdServlet extends HttpServlet {
         StoreCar storeCar = HbmStoreCar.instOf();
         Car car = storeCar.createCar(power, model, body, engine, drive);
         StoreAd storeAd = HbmStoreAd.instOf();
-        storeAd.addAd(Ad.of(descr, car, user, false));
-        resp.sendRedirect(req.getContextPath() + "/index.do");
+        Ad ad = Ad.of(descr, car, user, false);
+        int id = storeAd.addAd(ad);
+        req.setAttribute("id", id);
+        req.getRequestDispatcher("addphoto.jsp").forward(req, resp);
     }
 }
