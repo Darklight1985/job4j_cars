@@ -21,7 +21,7 @@ public class HbmStoreAdTest {
         Car car = Car.of("125", kiaRio, sedan, gasoline, front);
         storeCar.addCar(car);
         User user = User.of("Misha", "qwe123");
-        Ad ad = Ad.of("something", car, user,false);
+        Ad ad = Ad.of("something", car, user,true);
         storeAd.addAd(ad);
         List<Ad> list = storeAd.findAll();
         assertThat(list.get(0).getDescription(), is(ad.getDescription()));
