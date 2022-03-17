@@ -21,10 +21,11 @@ public class RegServlet extends HttpServlet {
         if (nonNull(HbmStoreUser.instOf().findUser(name))) {
             req.setAttribute("error", "Пользователь с данным именем уже зарегистрирован");
             req.getRequestDispatcher("reg.jsp").forward(req, resp);
-        }
+        } else {
             User user = User.of(name, password);
             StoreUser store = HbmStoreUser.instOf();
             store.addUser(user);
             resp.sendRedirect(req.getContextPath() + "/login.jsp");
         }
+    }
 }

@@ -23,12 +23,7 @@ public class HbmRun {
             BodyType coupe = BodyType.of("Купе");
             BodyType pickup = BodyType.of("Пикап");
 
-            MarkAvto kia = MarkAvto.of("Kia");
-            MarkAvto renau = MarkAvto.of("Renau");
-            MarkAvto lada = MarkAvto.of("Lada");
-
             Model kiaRio = Model.of("KiaRio");
-            kia.addModel(kiaRio);
 
             EngineType gasoline = EngineType.of("Бензин");
             EngineType diesel = EngineType.of("Дизель");

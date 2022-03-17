@@ -18,7 +18,6 @@
         <property name="format_sql">true</property>
         <property name="use_sql_comments">true</property>
 
-        <mapping class="ru.job4j.autosale.model.MarkAvto" />
         <mapping class="ru.job4j.autosale.model.Model" />
         <mapping class="ru.job4j.autosale.model.EngineType" />
         <mapping class="ru.job4j.autosale.model.DriveType" />

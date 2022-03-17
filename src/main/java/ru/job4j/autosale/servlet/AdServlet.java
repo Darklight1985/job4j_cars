@@ -17,7 +17,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 
+/**
+ * Сервлет отвечает за работу с обяъвлениями.
+ */
 public class AdServlet extends HttpServlet {
+
+    /**
+     * Метод doGet получает список объявлений из СУБД, записывает в формат JSON и отдает по запросу
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -32,6 +43,14 @@ public class AdServlet extends HttpServlet {
         out.flush();
     }
 
+    /**
+     * Метод doPost заносит объявление в СУБД, без ссылки на фото
+     * и передает id зарегестрированной заявки в страницу для загрузки фото.
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
