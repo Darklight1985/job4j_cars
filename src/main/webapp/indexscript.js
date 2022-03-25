@@ -67,7 +67,7 @@ function addRow(data) {
         $divcap = document.createElement('div');
         $newimg = document.createElement('img');
         $newimg.width = "450";
-        $newimg.src = download?name=data[i]['photo']:
+        $newimg.src = 'download?name=' + data[i]['photo'];
         $divcap.className = "col-md-5";
         $divcheck = document.createElement('div');
         $divcheck.className = "form-check";
@@ -162,6 +162,7 @@ function addRow(data) {
         $inputEngine = document.createElement('input');
         $inputEngine.className = "form-control";
         $inputEngine.style = "width: 100%";
+
         $inputEngine.value = data[i]['car'].engine.name;
         $inputEngine.readOnly = true;
 

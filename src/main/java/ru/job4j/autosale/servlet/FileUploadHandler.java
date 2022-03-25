@@ -44,7 +44,7 @@ public class FileUploadHandler extends HttpServlet {
             request.setAttribute("message",
                     "Sorry this Servlet only handles file upload request");
         }
-        ad.setPhoto(SourcePath.giveSub() + name);
+        ad.setPhoto(name);
        HbmStoreAd.instOf().updateAd(ad);
         response.sendRedirect(request.getContextPath() + "/index.do");
     }

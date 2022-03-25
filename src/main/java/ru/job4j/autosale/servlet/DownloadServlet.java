@@ -15,14 +15,14 @@ public class DownloadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String requestedImage = req.getPathInfo();
         String name = req.getParameter("name");
-        File image = new File(SourcePath.give(), URLDecoder.decode(requestedImage, "UTF-8"));
-        String contentType = getServletContext().getMimeType(image.getName());
-        resp.reset();
-        resp.setContentType(contentType);
-        resp.setHeader("Content-Length", String.valueOf(image.length()));
-        Files.copy(image.toPath(), resp.getOutputStream());
+        resp.setContentType("name=" + name);
+        resp.setContentType("image/jpg");
+        resp.setHeader("Content-Disposition", "attachment; filename=\"" + name + "\"");
+        File file = new File(SourcePath.give() + File.separator + name);
+        try (FileInputStream in = new FileInputStream(file)) {
+            resp.getOutputStream().write(in.readAllBytes());
+        }
     }
 }
 
