@@ -3,12 +3,12 @@
 <head>
     <title>TODOlist</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
-    <script type="text/javascript" src="indexscript.js"></script>
+    <script type="text/javascript" src="indexscript.js" charset="cp1251"></script>
 </head>
 <body>
 <!-- Optional JavaScript -->
@@ -33,6 +33,25 @@
             getDrive();
             getEngine();
         }})
+
+    function getUser() {
+        var value;
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/salecars/auth.do",
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                $('#userrow li:first a').remove();
+                $p = document.createElement('a')
+                $p.className = "nav-link";
+                $p.text = "Пользователь: " + data['name']
+                $('#userrow li:first').append($p);
+                value = data['name'];
+            }
+        })
+        return value;
+    }
 </script>
 
 <div class="container-fluid">
@@ -41,59 +60,59 @@
             <li class="nav-item">
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/salecars/logout.do">Р’С‹Р№С‚Рё</a>
+                <a class="nav-link" href="/salecars/logout.do">Выйти</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/salecars/index.do">Р’ РіР»Р°РІРЅРѕРµ РјРµРЅСЋ</a>
+                <a class="nav-link" href="/salecars/index.do">В главное меню</a>
             </li>
         </ul>
     </div>
-    <span class="badge badge-secondary"><h4>РќРѕРІРѕРµ РѕР±СЉСЏРІР»РµРЅРёРµ</h4></span>
+    <span class="badge badge-secondary"><h4>Новое объявление</h4></span>
     <form action="adcar" method="post" enctype="application/x-www-form-urlencoded">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text" for="ModelGroup">РњРѕРґРµР»СЊ</label>
+            <label class="input-group-text" for="ModelGroup">Модель</label>
         </div>
         <select class="custom-select" name="model" id="ModelGroup" required>
-            <option selected>Р’С‹Р±РµСЂРёС‚Рµ РјРѕРґРµР»СЊ</option>
+            <option selected>Выберите модель</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
         </select>
         <div class="input-group-prepend">
-            <label class="input-group-text" for="BodyGroup">РўРёРї РєСѓР·РѕРІР°</label>
+            <label class="input-group-text" for="BodyGroup">Тип кузова</label>
         </div>
         <select class="custom-select" name="body" id="BodyGroup" required>
-            <option selected>Р’С‹Р±РµСЂРёС‚Рµ С‚РёРї РєСѓР·РѕРІР°</option>
+            <option selected>Выберите тип кузова</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
         </select>
         <div class="input-group-prepend">
-            <label class="input-group-text" for="DriveGroup">РўРёРї РїСЂРёРІРѕРґР°</label>
+            <label class="input-group-text" for="DriveGroup">Тип привода</label>
         </div>
         <select class="custom-select" name="drive" id="DriveGroup" required>
-            <option selected>Р’С‹Р±РµСЂРёС‚Рµ С‚РёРї РїСЂРёРІРѕРґР°</option>
+            <option selected>Выберите тип привода</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
         </select>
         <div class="input-group-prepend">
-            <label class="input-group-text" for="EngineGroup">Р”РІРёРіР°С‚РµР»СЊ</label>
+            <label class="input-group-text" for="EngineGroup">Двигатель</label>
         </div>
         <select class="custom-select" name="engine" id="EngineGroup" required>
-            <option selected>Р’С‹Р±РµСЂРёС‚Рµ С‚РёРї РґРІРёРіР°С‚РµР»СЏ</option>
+            <option selected>Выберите тип двигателя</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
         </select>
     </div>
     <div class="form-group" align="center">
-            <label>РњРѕС‰РЅРѕСЃС‚СЊ</label>
+            <label>Мощность</label>
             <input type="text" class="form-control" name="power" id="powerin" style="width: 45%" required>
-            <label>РћРїРёСЃР°РЅРёРµ</label>
+            <label>Описание</label>
             <input type="text" class="form-control" name="descr" id="descrin" style="width: 45%" required>
-            <button type="submit" class="btn btn-primary" style="width: 50%">Р”РѕР±Р°РІРёС‚СЊ
+            <button type="submit" class="btn btn-primary" style="width: 50%">Добавить
             </button>
     </div>
     </form>

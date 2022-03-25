@@ -8,11 +8,6 @@
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 
-  <servlet>
-    <servlet-name>CalcServlet</servlet-name>
-    <servlet-class>ru.job4j.autosale.servlet.CalcServlet</servlet-class>
-  </servlet>
-
 
   <servlet>
     <servlet-name>AdServlett</servlet-name>
@@ -73,12 +68,6 @@
     <servlet-name>DownloadServlet</servlet-name>
     <servlet-class>ru.job4j.autosale.servlet.DownloadServlet</servlet-class>
   </servlet>
-
-
-  <servlet-mapping>
-    <servlet-name>CalcServlet</servlet-name>
-    <url-pattern>/calc</url-pattern>
-  </servlet-mapping>
 
   <servlet-mapping>
     <servlet-name>AdServlett</servlet-name>
@@ -150,18 +139,18 @@
     <url-pattern>/download</url-pattern>
   </servlet-mapping>
 
-<!--  <filter>-->
-<!--    <filter-name>CharacterEncodingFilter</filter-name>-->
-<!--    <filter-class>ru.job4j.autosale.filter.CharacterEncodingFilter</filter-class>-->
-<!--    <init-param>-->
-<!--      <param-name>requestEncoding</param-name>-->
-<!--      <param-value>UTF-8</param-value>-->
-<!--    </init-param>-->
-<!--  </filter>-->
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>ru.job4j.autosale.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>requestEncoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
 
-<!--  <filter-mapping>-->
-<!--    <filter-name>CharacterEncodingFilter</filter-name>-->
-<!--    <url-pattern>/*</url-pattern>-->
-<!--  </filter-mapping>-->
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
 </web-app>

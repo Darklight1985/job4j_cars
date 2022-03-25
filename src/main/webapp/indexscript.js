@@ -1,3 +1,5 @@
+
+
 function addAds() {
     $.ajax({
         type: "GET",
