@@ -13,23 +13,19 @@ public class Car implements Serializable {
 
     private String power;
 
-    @ManyToOne  (cascade = {CascadeType.DETACH, CascadeType.REMOVE,
-            CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "model_id", foreignKey = @ForeignKey(name = "MODEL_ID_FK"))
     private Model model;
 
-    @ManyToOne (cascade = {CascadeType.DETACH, CascadeType.REMOVE,
-            CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "bodyType_id", foreignKey = @ForeignKey(name = "BODY_ID_FK"))
     private BodyType bodyType;
 
-    @ManyToOne (cascade = {CascadeType.DETACH, CascadeType.REMOVE,
-            CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "engine_id", foreignKey = @ForeignKey(name = "ENGINE_ID_FK"))
     private EngineType engine;
 
-    @ManyToOne (cascade = {CascadeType.DETACH, CascadeType.REMOVE,
-            CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "driverType_id", foreignKey = @ForeignKey(name = "DRIVERT_ID_FK"))
     private DriveType driveType;
 
