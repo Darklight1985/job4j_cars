@@ -69,6 +69,11 @@
     <servlet-class>ru.job4j.autosale.servlet.PutServlet</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>DownloadServlet</servlet-name>
+    <servlet-class>ru.job4j.autosale.servlet.DownloadServlet</servlet-class>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>CalcServlet</servlet-name>
@@ -139,4 +144,24 @@
     <filter-name>AuthFilter</filter-name>
     <url-pattern>*.html</url-pattern>
   </filter-mapping>
+
+  <servlet-mapping>
+    <servlet-name>DownloadServlet</servlet-name>
+    <url-pattern>/download</url-pattern>
+  </servlet-mapping>
+
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>ru.job4j.autosale.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>requestEncoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
 </web-app>

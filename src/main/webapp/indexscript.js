@@ -18,10 +18,27 @@ function pass(elem) {
         data: {
             'id': status
         },
-        success: function () {
+        success: function (data) {
             addAds()
         }
     })
+}
+
+function getPhoto(elem) {
+    var value;
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/salecars/download',
+        async: false,
+        data: {
+            'name': elem
+        },
+        dataType: 'image/jpg',
+        success: function (data) {
+            value = data;
+        }
+    })
+    return value;
 }
 
 function getUser() {
@@ -50,7 +67,7 @@ function addRow(data) {
         $divcap = document.createElement('div');
         $newimg = document.createElement('img');
         $newimg.width = "450";
-        $newimg.src = data[i]['photo'];
+        $newimg.src = download?name=data[i]['photo']:
         $divcap.className = "col-md-5";
         $divcheck = document.createElement('div');
         $divcheck.className = "form-check";

@@ -6,6 +6,7 @@ import java.util.Properties;
 
 public class SourcePath {
    private static String pathToImages;
+   private static String pathToImageSub;
 
     private SourcePath() {
         Properties properties = new Properties();
@@ -17,6 +18,12 @@ public class SourcePath {
             e.printStackTrace();
         }
         this.pathToImages = properties.getProperty("pathToDir");
+        this.pathToImageSub = properties.getProperty("pathtoImages");
+    }
+
+    public static String giveSub() {
+        new SourcePath();
+        return pathToImageSub;
     }
 
     public static String give() {
