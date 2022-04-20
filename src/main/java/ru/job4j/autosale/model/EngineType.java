@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "engines")
-public class EngineType implements Serializable {
+public class EngineType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

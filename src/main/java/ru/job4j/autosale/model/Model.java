@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "models")
-public class Model implements Serializable {
+public class Model {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

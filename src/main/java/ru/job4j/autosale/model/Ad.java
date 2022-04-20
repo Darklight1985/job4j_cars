@@ -1,13 +1,12 @@
 package ru.job4j.autosale.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "ads")
-public class Ad implements Serializable {
+public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

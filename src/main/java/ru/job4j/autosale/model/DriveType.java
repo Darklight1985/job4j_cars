@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "driver_type")
-public class DriveType implements Serializable {
+public class DriveType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

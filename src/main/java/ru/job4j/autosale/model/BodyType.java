@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "bodys")
-public class BodyType implements Serializable {
+public class BodyType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
